@@ -9,5 +9,10 @@
   "icons": {
     "16": "logo192.png",
     "32": "logo512.png"
-  }
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://api.twitter.com/*"
+  ]
 }
