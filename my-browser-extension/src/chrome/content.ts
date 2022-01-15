@@ -18,7 +18,7 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: any, respo
         message.from === Sender.React &&
         message.message === "delete logo") {
 
-        const logo = document.getElementById('hplogo');
+        const logo = document.getElementsByClassName('lnXdpd')[0];
         logo?.parentElement?.removeChild(logo)
     }
 }
