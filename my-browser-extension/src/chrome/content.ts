@@ -1,6 +1,7 @@
 import {ChromeMessage, Sender} from "../types";
+import request = chrome.permissions.request;
 
-const messagesFromReactAppListener = (message: ChromeMessage, sender: any, response: any) => {
+async function messagesFromReactAppListener(message: ChromeMessage, sender: any, response: any) {
     console.log('[content.js]. Message received', {
         message,
         sender,
@@ -28,4 +29,7 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: any, respo
 /**
  * Fired when a message is sent from either an extension process or a content script.
  */
-chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    messagesFromReactAppListener(request, sender, sendResponse).then();
+    return true;
+});
