@@ -1,24 +1,27 @@
 import {ChromeMessage, Sender} from "../types";
-import request = chrome.permissions.request;
 
-async function messagesFromReactAppListener(message: ChromeMessage, sender: any, response: any) {
-    console.log('[content.js]. Message received', {
-        message,
-        sender,
-    })
+type MessageResponse = (response?: any) => void
 
-    if (
-        sender.id === chrome.runtime.id &&
-        message.from === Sender.React &&
-        message.message === 'Hello from React') {
+const validateSender = (
+    message: ChromeMessage,
+    sender: chrome.runtime.MessageSender
+) => {
+    return sender.id === chrome.runtime.id && message.from === Sender.React;
+}
+
+const messagesFromReactAppListener = (
+    message: ChromeMessage,
+    sender: chrome.runtime.MessageSender,
+    response: MessageResponse
+) => {
+
+    const isValidated = validateSender(message, sender);
+
+    if (isValidated && message.message === 'Hello from React') {
         response('Hello from content.js');
     }
 
-    if (
-        sender.id === chrome.runtime.id &&
-        message.from === Sender.React &&
-        message.message === "delete images") {
-
+    if (isValidated && message.message === "delete images") {
         const logo = document.getElementsByTagName('img');
         for (let i = 0; i < logo.length; i++) {
             logo[i]?.parentElement?.removeChild(logo[i])
@@ -26,10 +29,12 @@ async function messagesFromReactAppListener(message: ChromeMessage, sender: any,
     }
 }
 
-/**
- * Fired when a message is sent from either an extension process or a content script.
- */
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    messagesFromReactAppListener(request, sender, sendResponse).then();
-    return true;
-});
+const main = () => {
+    console.log('[content.ts] Main')
+    /**
+     * Fired when a message is sent from either an extension process or a content script.
+     */
+    chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
+}
+
+main();
