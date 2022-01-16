@@ -1,31 +1,29 @@
+"name": "Nues",
+"version": "1.0",
+"manifest_version": 3,
+"action": {
+"default_popup": "index.html",
+"default_title": "Open the popup"
+},
+"icons": {
+"16": "logo192.png",
+"32": "logo512.png"
+},
+"content_scripts": [
 {
-  "name": "Nues",
-  "version": "1.0",
-  "manifest_version": 3,
-  "action": {
-    "default_popup": "index.html",
-    "default_title": "Open the popup"
-  },
-  "icons": {
-    "16": "logo192.png",
-    "32": "logo512.png"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "./static/js/content.js"
-      ],
-      "all_frames": false,
-      "run_at": "document_end"
-    }
-  ],
-  "permissions": [
-    "activeTab",
-    "tabs",
-    "storage"
-  ]
+"matches": [
+"http://*/*",
+"https://*/*"
+],
+"js": [
+"./static/js/content.js"
+],
+"all_frames": false,
+"run_at": "document_end"
 }
+],
+"permissions": [
+"activeTab",
+"tabs",
+"storage"
+]
