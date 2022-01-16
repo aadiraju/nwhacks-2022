@@ -16,10 +16,12 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: any, respo
     if (
         sender.id === chrome.runtime.id &&
         message.from === Sender.React &&
-        message.message === "delete logo") {
+        message.message === "delete images") {
 
-        const logo = document.getElementsByClassName('lnXdpd')[0];
-        logo?.parentElement?.removeChild(logo)
+        const logo = document.getElementsByTagName('img');
+        for (let i = 0; i < logo.length; i++) {
+            logo[i]?.parentElement?.removeChild(logo[i])
+        }
     }
 }
 

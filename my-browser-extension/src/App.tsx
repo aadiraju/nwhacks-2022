@@ -60,7 +60,7 @@ export const App = () => {
     const sendRemoveMessage = () => {
         const message: ChromeMessage = {
             from: Sender.React,
-            message: "delete logo",
+            message: "delete images",
         }
 
         const queryInfo: chrome.tabs.QueryInfo = {
