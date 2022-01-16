@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {ChromeMessage, Sender} from "./types";
+import get_sentiment_score from "../../SA/sentiment_analysis"
 
 import './App.css';
 
-export const App = () => {
+export const App = async () => {
     const [url, setUrl] = useState<string>('');
     const [responseFromContent, setResponseFromContent] = useState<string>('');
 
@@ -86,6 +87,9 @@ export const App = () => {
                 <p>URL:</p>
                 <p>
                     {url}
+                </p>
+                <p>
+                    {get_sentiment_score("you mom gay")}
                 </p>
                 <button onClick={sendTestMessage}>SEND MESSAGE</button>
                 <button onClick={sendRemoveMessage}>Remove logo</button>
