@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ChromeMessage, Sender} from "./types";
-import get_sentiment_score from "../../SA/sentiment_analysis"
+import {get_sentiment_score} from "./SA/sentiment_analysis"
 
 import './App.css';
 
